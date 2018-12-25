@@ -33,18 +33,6 @@ class _MapViewState extends State<MapView> {
     if (widget.onTextViewCreated == null) {
       return;
     }
-    widget.onTextViewCreated(new SpaceonMapPlugin());
+    widget.onTextViewCreated(new SpaceonMapPlugin(id));
   }
 }
-
-/*class TextViewController {
-  TextViewController._(int id)
-      : _channel = new MethodChannel('plugins.felix.angelov/textview_$id');
-
-  final MethodChannel _channel;
-
-  Future<void> setText(String text) async {
-    assert(text != null);
-    return _channel.invokeMethod('setText', text);
-  }
-}*/

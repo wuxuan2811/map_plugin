@@ -3,11 +3,16 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class SpaceonMapPlugin {
-  static const MethodChannel _channel =
-      const MethodChannel('plugins.spaceon/mapview');
+  final MethodChannel _channel;
 
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
+  SpaceonMapPlugin(int id)
+      : _channel = MethodChannel('plugins.spaceon/mapview');
+
+  Future<void> zoomIn() async {
+    return _channel.invokeMethod('zoomIn');
+  }
+
+  Future<void> zoomOut() async {
+    return _channel.invokeMethod('zoomOut');
   }
 }

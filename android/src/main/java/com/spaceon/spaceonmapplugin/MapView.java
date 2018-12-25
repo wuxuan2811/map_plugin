@@ -37,6 +37,12 @@ public class MapView implements PlatformView, MethodChannel.MethodCallHandler
     {
         switch (methodCall.method)
         {
+            case "zoomIn":
+                onZoomIn();
+                break;
+            case "zoomOut":
+                onZoomOut();
+                break;
             default:
                 result.notImplemented();
         }
@@ -48,7 +54,8 @@ public class MapView implements PlatformView, MethodChannel.MethodCallHandler
     {
     }
 
-    private void init(){
+    private void init()
+    {
         mMapView.setTileSource(SpaceonTileSource.newTileSource(TileType.CHART, true));
         mMapController = mMapView.getController();
 
@@ -58,7 +65,7 @@ public class MapView implements PlatformView, MethodChannel.MethodCallHandler
         mMapView.setMaxZoomLevel(19.0d);
         mMapView.setMinZoomLevel(4.0d);
         //隐藏内置的放大缩小建
-        //mMapView.getZoomController().setVisibility(NEVER);
+        mMapView.setBuiltInZoomControls(false);
         mMapView.setMultiTouchControls(true);
 
         //map scale 显示比例尺
@@ -67,5 +74,15 @@ public class MapView implements PlatformView, MethodChannel.MethodCallHandler
         //海里单位
         scaleBarOverlay.setUnitsOfMeasure(ScaleBarOverlay.UnitsOfMeasure.nautical);
         mMapView.getOverlays().add(scaleBarOverlay);
+    }
+
+    public void onZoomIn()
+    {
+        mMapController.zoomIn();
+    }
+
+    public void onZoomOut()
+    {
+        mMapController.zoomOut();
     }
 }
