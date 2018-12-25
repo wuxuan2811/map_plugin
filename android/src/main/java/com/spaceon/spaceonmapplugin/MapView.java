@@ -1,6 +1,7 @@
 package com.spaceon.spaceonmapplugin;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import com.spaceon.map.util.SpaceonTileSource;
 import com.spaceon.map.util.TileType;
@@ -10,6 +11,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.platform.PlatformView;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 
 public class MapView implements PlatformView, MethodChannel.MethodCallHandler
@@ -43,6 +45,8 @@ public class MapView implements PlatformView, MethodChannel.MethodCallHandler
             case "zoomOut":
                 onZoomOut();
                 break;
+            case "center":
+                centerCanvas(methodCall, result);
             default:
                 result.notImplemented();
         }
@@ -84,5 +88,12 @@ public class MapView implements PlatformView, MethodChannel.MethodCallHandler
     public void onZoomOut()
     {
         mMapController.zoomOut();
+    }
+
+    public void centerCanvas(MethodCall methodCall, MethodChannel.Result result)
+    {
+        double lfLat = methodCall.argument("Lat");
+        double lfLon = methodCall.argument("Lon");
+        mMapController.setCenter(new GeoPoint(lfLat, lfLon));
     }
 }

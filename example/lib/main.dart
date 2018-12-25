@@ -6,6 +6,7 @@ void main() => runApp(MaterialApp(home: MapViewExample()));
 
 class MapViewExample extends StatelessWidget {
   SpaceonMapPlugin mapContoller;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +29,11 @@ class MapViewExample extends StatelessWidget {
                   IconButton(
                       icon: Icon(Icons.zoom_out),
                       iconSize: 32,
-                      onPressed: zoomOut)
+                      onPressed: zoomOut),
+                  IconButton(
+                      icon: Icon(Icons.center_focus_strong),
+                      iconSize: 32,
+                      onPressed: center)
                 ],
               ),
             ),
@@ -46,5 +51,9 @@ class MapViewExample extends StatelessWidget {
 
   zoomOut() {
     mapContoller.zoomOut();
+  }
+
+  center(){
+    mapContoller.center(30.67, 104.07);
   }
 }
