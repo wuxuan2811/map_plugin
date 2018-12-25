@@ -31,11 +31,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
-        abortOnError false
         disable 'InvalidPackage'
     }
 }
 
 dependencies {
-    implementation 'org.osmdroid:osmdroid-android:6.0.3'
+    //implementation 'org.osmdroid:osmdroid-android:6.0.3'
+    implementation files('libs/osmdroid-android-release.aar')
+    compileOnly files('libs/flutter.jar')
 }
